@@ -47,7 +47,7 @@ prompt_pure_check_cmd_exec_time() {
 	integer elapsed
 	(( elapsed = EPOCHSECONDS - ${prompt_pure_cmd_timestamp:-$EPOCHSECONDS} ))
 	prompt_pure_cmd_exec_time=
-	(( elapsed > ${PURE_CMD_MAX_EXEC_TIME:=5} )) && {
+	(( elapsed > ${PURE_CMD_MAX_EXEC_TIME:=0} )) && {
 		prompt_pure_human_time_to_var $elapsed "prompt_pure_cmd_exec_time"
 	}
 }
@@ -432,7 +432,7 @@ prompt_pure_setup() {
 	[[ $UID -eq 0 ]] && prompt_pure_username=' %F{white}%n%f%F{242}@%m%f'
 
 	# prompt turns red if the previous command didn't exit with 0
-	PROMPT='%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f '
+	PROMPT='%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-$}%f '
 }
 
 prompt_pure_setup "$@"
